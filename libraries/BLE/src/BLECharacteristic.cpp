@@ -477,7 +477,7 @@ void BLECharacteristic::indicate() {
  * will not block; it is a fire and forget.
  * @return N/A.
  */
-void BLECharacteristic::notify(bool is_notification) {
+void BLECharacteristic::notify(bool is_notification, uint16_t client) {
 	log_v(">> notify: length: %d", m_value.getValue().length());
 
 	assert(getService() != nullptr);
@@ -512,6 +512,11 @@ void BLECharacteristic::notify(bool is_notification) {
 		}
 	}
 	for (auto &myPair : getService()->getServer()->getPeerDevices(false)) {
+		if (client > 0){
+			if (myPair.first != client){
+				continue;
+			}
+		}
 		uint16_t _mtu = (myPair.second.mtu);
 		if (m_value.getValue().length() > _mtu - 3) {
 			log_w("- Truncating to %d bytes (maximum notify size)", _mtu - 3);

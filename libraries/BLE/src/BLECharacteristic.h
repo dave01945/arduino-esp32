@@ -64,7 +64,7 @@ public:
 	uint8_t*       getData();
 
 	void indicate();
-	void notify(bool is_notification = true);
+	void notify(bool is_notification = true, uint16_t client = 0);
 	void setBroadcastProperty(bool value);
 	void setCallbacks(BLECharacteristicCallbacks* pCallbacks);
 	void setIndicateProperty(bool value);
