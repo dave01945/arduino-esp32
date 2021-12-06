@@ -477,7 +477,7 @@ void BLECharacteristic::indicate() {
  * will not block; it is a fire and forget.
  * @return N/A.
  */
-void BLECharacteristic::notify(bool is_notification) {
+void BLECharacteristic::notify(bool is_notification, uint16_t client) {
 	log_v(">> notify: length: %d", m_value.getValue().length());
 
 	assert(getService() != nullptr);
