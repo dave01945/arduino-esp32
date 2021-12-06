@@ -512,7 +512,7 @@ void BLECharacteristic::notify(bool is_notification, uint16_t client) {
 		}
 	}
 	for (auto &myPair : getService()->getServer()->getPeerDevices(false)) {
-		if (client > 0){
+		if (client < 3){
 			if (myPair.first != client){
 				continue;
 			}
