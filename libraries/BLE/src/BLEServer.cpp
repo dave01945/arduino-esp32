@@ -167,11 +167,11 @@ void BLEServer::handleGATTServerEvent(esp_gatts_cb_event_t event, esp_gatt_if_t 
 		case ESP_GATTS_CONNECT_EVT: {
 			m_connId = param->connect.conn_id;
 			addPeerDevice((void*)this, false, m_connId);
+			m_connectedCount++;   // Increment the number of connected devices count.
 			if (m_pServerCallbacks != nullptr) {
 				m_pServerCallbacks->onConnect(this);
 				m_pServerCallbacks->onConnect(this, param);			
-			}
-			m_connectedCount++;   // Increment the number of connected devices count.	
+			}	
 			break;
 		} // ESP_GATTS_CONNECT_EVT
 
@@ -202,10 +202,7 @@ void BLEServer::handleGATTServerEvent(esp_gatts_cb_event_t event, esp_gatt_if_t 
 		// If we receive a disconnect event then invoke the callback for disconnects (if one is present).
 		// we also want to start advertising again.
 		case ESP_GATTS_DISCONNECT_EVT: {
-			if (m_pServerCallbacks != nullptr) {         // If we have callbacks, call now.
-				m_pServerCallbacks->onDisconnect(this, param);
-			}
-            if(m_connId == ESP_GATT_IF_NONE) {
+			if(m_connId == ESP_GATT_IF_NONE) {
                 return;
             }
 
@@ -214,6 +211,10 @@ void BLEServer::handleGATTServerEvent(esp_gatts_cb_event_t event, esp_gatt_if_t 
 			if(removePeerDevice(param->disconnect.conn_id, false)) {
                 m_connectedCount--;                          // Decrement the number of connected devices count.
             }
+
+			if (m_pServerCallbacks != nullptr) {         // If we have callbacks, call now.
+				m_pServerCallbacks->onDisconnect(this, param);
+			}
             break;
 		} // ESP_GATTS_DISCONNECT_EVT
 

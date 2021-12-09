@@ -592,7 +592,7 @@ void BLECharacteristic::setCallbacks(BLECharacteristicCallbacks* pCallbacks) {
  * registered, the service will be given a "handle" that it knows the characteristic as.  This handle is unique to the
  * server/service but it is told to the service, not the characteristic associated with the service.  This internally
  * exposed function can be invoked by the service against this model of the characteristic to allow the characteristic
- * to learn its own handle.  Once the characteristic knows its own handle, it will be able to see incoming GATT events
+ * to learn its own handle. Once the characteristic knows its own handle, it will be able to see incoming GATT events
  * that will be propagated down to it which contain a handle value and now know that the event is destined for it.
  * @param [in] handle The handle associated with this characteristic.
  */
