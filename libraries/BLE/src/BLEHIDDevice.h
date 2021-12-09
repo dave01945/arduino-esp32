@@ -46,7 +46,7 @@ public:
 	//BLECharacteristic*	hidInfo();
 	void	hidInfo(uint8_t country, uint8_t flags);
 	//BLECharacteristic* 	batteryLevel();
-	void 	setBatteryLevel(uint8_t level);
+	void 	setBatteryLevel(uint8_t level, uint16_t client);
 
 
 	//BLECharacteristic* 	reportMap();

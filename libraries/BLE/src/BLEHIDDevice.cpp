@@ -192,9 +192,9 @@ BLECharacteristic* BLEHIDDevice::protocolMode() {
 	return m_protocolModeCharacteristic;
 }
 
-void BLEHIDDevice::setBatteryLevel(uint8_t level) {
+void BLEHIDDevice::setBatteryLevel(uint8_t level, uint16_t client) {
 	m_batteryLevelCharacteristic->setValue(&level, 1);
-	m_batteryLevelCharacteristic->notify();	
+	m_batteryLevelCharacteristic->notify(true, client);	
 }
 /*
  * @brief Returns battery level characteristic

@@ -463,10 +463,10 @@ void BLECharacteristic::handleGATTServerEvent(
  * will block waiting a positive confirmation from the client.
  * @return N/A
  */
-void BLECharacteristic::indicate() {
+void BLECharacteristic::indicate(uint16_t client) {
 
 	log_v(">> indicate: length: %d", m_value.getValue().length());
-	notify(false);
+	notify(false, client);
 	log_v("<< indicate");
 } // indicate
 

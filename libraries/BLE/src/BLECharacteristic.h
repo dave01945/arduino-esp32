@@ -63,7 +63,7 @@ public:
 	std::string    getValue();
 	uint8_t*       getData();
 
-	void indicate();
+	void indicate(uint16_t client);
 	void notify(bool is_notification = true, uint16_t client = 0);
 	void setBroadcastProperty(bool value);
 	void setCallbacks(BLECharacteristicCallbacks* pCallbacks);
