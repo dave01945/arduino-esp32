@@ -499,7 +499,7 @@ void BLECharacteristic::notify(bool is_notification, uint16_t client) {
 	BLE2902 *p2902 = (BLE2902*)getDescriptorByUUID((uint16_t)0x2902);
 	if(is_notification) {
 		if (p2902 != nullptr && !p2902->getNotifications()) {
-			log_v("<< notifications disabled; ignoring");
+			log_w("<< notifications disabled; ignoring");
 			m_pCallbacks->onStatus(this, BLECharacteristicCallbacks::Status::ERROR_NOTIFY_DISABLED, 0);   // Invoke the notify callback.
 			return;
 		}
@@ -513,7 +513,7 @@ void BLECharacteristic::notify(bool is_notification, uint16_t client) {
 	}
 	int test = 0;
 	for (auto &myPair : getService()->getServer()->getPeerDevices(false)) {
-		log_v("Tetsing: ", test++);
+		log_w("Tetsing: ", test++);
 		if (client < 3){
 			if (myPair.first != client){
 				continue;
